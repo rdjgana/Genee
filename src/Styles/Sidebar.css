@@ -1,0 +1,32 @@
+
+.category{
+    
+    height: 80vh;
+    width: max-content;
+    border-right: 1px solid #31344c;
+    overflow: hidden;
+    overflow-y: scroll;
+    
+    
+}
+
+.category::-webkit-scrollbar{
+    width: 4px;
+}
+
+.category::-webkit-scrollbar-thumb{
+    background-color: #414141;
+    border-radius: 20px;
+}
+
+.category::-webkit-scrollbar-thumb:hover{
+    background-color: yellow;
+}
+
+
+.category-list{
+    margin-top: 82px;
+    padding-left: 52px;
+    padding-right: 10px;
+    width: max-content;
+}
