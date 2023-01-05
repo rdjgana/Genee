@@ -36,7 +36,7 @@
 }
 
 .category::-webkit-scrollbar-thumb{
-    background-color: whitesmoke;
+    background-color: gray;
     border-radius: 20px;
 }
 
@@ -84,6 +84,8 @@
     color: #FC3CAC;
     font-weight: 800;
 }
+
+
 
 
 

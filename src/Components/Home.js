@@ -20,6 +20,10 @@ const Home = () => {
     }
   };
 
+  const filtered = CardData.filter((val) =>
+    val.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   window.addEventListener("scroll", navbarColorChange);
 
   return (
@@ -55,7 +59,7 @@ const Home = () => {
         <div className="content w-full h-full overflow-hidden">
           <nav
             className={`navbar 
-             md:flex justify-between bg-transparent md:items-center md:py-4 md:pl-9 pr-6 px-3 top-0 sticky`}
+             md:flex justify-between h-max bg-transparent md:items-center md:py-4 md:pl-9 pr-6 px-3 top-0 sticky`}
           >
             <div className="flex justify-between">
               <span className="text-md text-white">
@@ -86,23 +90,23 @@ const Home = () => {
             </div>
 
             <ul
-              className={`md:flex md:items-center z-[-1] md:z-auto md:static w-full  left-0 md:w-auto md:py-0  ${
+              className={`md:flex md:items-center z-[-1] gap-2 md:z-auto md:static w-full  left-0 md:w-auto md:py-0  ${
                 open ? "" : "md:opacity-100 opacity-0"
               }
               `}
             >
-              <li className="p-2 text-xl text-white text-worksan font-normal">
-                <Link to="/" className="navlink">
+              <li className="px-3 text-lg text-white text-worksan font-normal">
+                <Link to="/" className="navlink py-1 px-1.5">
                   Design
                 </Link>
               </li>
-              <li className="p-2 text-xl text-white text-worksan font-normal">
-                <Link to="/" className="navlink">
+              <li className=" p-2 text-lg text-white text-worksan font-normal">
+                <Link to="/" className="navlink py-1 px-1.5">
                   Development
                 </Link>
               </li>
-              <li className="p-2 text-xl text-white text-worksan font-normal">
-                <Link to="/" className="navlink">
+              <li className="p-2 text-lg text-white text-worksan font-normal">
+                <Link to="/" className="navlink py-1 px-1.5">
                   3D
                 </Link>
               </li>
@@ -110,22 +114,16 @@ const Home = () => {
           </nav>
 
           <div className="flex flex-wrap gap-x-10  gap-y-[.5px] justify-center py-6 ">
-            {CardData.filter((val) => {
-              if (searchTerm === "") {
-                return val;
-              } else if (
+            {filtered.length > 0 ? (
+              CardData.filter((val) =>
                 val.title.toLowerCase().includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              }
-            }).map((item, index) => {
-              return (
+              ).map((item, index) => (
                 <div
                   className="flex flex-col w-[209px] mt-3 overflow-visible "
                   key={index}
                 >
                   <img
-                    className="w-[209px] h-[209px] bg-white rounded-lg transition-all ease-in hover:translate-y-[-1.2%] hover:translate-x-0 duration-100 cursor-pointer"
+                    className="w-[209px] h-[209px] bg-white rounded-lg transition-all ease-in hover:translate-y-[-1.5%] hover:translate-x-0 duration-50 cursor-pointer"
                     src={item.image}
                     alt="Sunset in the mountains"
                   />
@@ -136,8 +134,10 @@ const Home = () => {
                     <p className="text-smoke-400 text-sm">{item.description}</p>
                   </div>
                 </div>
-              );
-            })}
+              ))
+            ) : (
+              <p className="found-message text-gray-500">NotFound</p>
+            )}
           </div>
           <Footer />
         </div>

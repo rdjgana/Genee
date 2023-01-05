@@ -15,6 +15,7 @@ module.exports = {
         secular: ["Secular One", " sans-serif"],
       },
       fontSize: {
+        xsm: "12px",
         xmd: "17px",
       },
       borderColor: {
@@ -30,6 +31,7 @@ module.exports = {
           200: "#414141",
           300: "#EDE7EC",
           400: "#C2C2C2",
+          500: "#999999",
         },
       },
     },
