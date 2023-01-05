@@ -6,6 +6,7 @@ module.exports = {
       maxWidth: {
         100: "100px",
         200: "230px",
+        300: "236px",
       },
       fontFamily: {
         poppins: ["Poppins", " sans-serif"],
