@@ -18,7 +18,7 @@ export const CardData = [
       "https://img.freepik.com/free-photo/red-heart-paper-hand-craft-element_53876-128923.jpg?size=338&ext=jpg&ga=GA1.2.46169027.1667123875&semt=sph",
     title: "Figma",
     description:
-      "A showcase of The Best Animation Websites. Fantastic animation website designs for inspiration.",
+      "Portfolio website inspiration. A showcase of beautifully designed, super-effective portfolios from individuals.",
   },
   {
     image:
