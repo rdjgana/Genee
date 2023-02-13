@@ -13,7 +13,7 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [openCat, setCatOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [size, setSize] = useState(0);
+  const [size, setSize] = useState();
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
 
