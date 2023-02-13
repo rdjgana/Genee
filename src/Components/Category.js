@@ -8,8 +8,10 @@ import "../Styles/Home.css";
 import { BiSearch } from "react-icons/bi";
 import Footer from "./Footer";
 import axios from "axios";
+import { useParams } from "react-router";
 
-const Home = () => {
+const Category = () => {
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
   const [openCat, setCatOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,20 +36,21 @@ const Home = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL}/user/view/getProduct`)
+      .post(`${process.env.REACT_APP_URL}/user/view/categoryProducts`, {
+        categoryId: id,
+      })
       .then((res) => {
         // console.log(res.data.data);
         setProduct(res.data.data);
       });
-  }, []);
+  }, [id]);
 
   const filtered = product.filter((val) =>
     val.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
 
-  const cattitleActive = "text-dark-200 font-bold py-1 w-full ";
-  const cattitle = "text-white font-bold py-1  hover:text-dark-200 ";
+  const cattitleActive = "text-dark-200 font-bold py-1 w-full";
+  const cattitle = "text-white font-bold py-1 ";
 
   return (
     <>
@@ -90,15 +93,9 @@ const Home = () => {
             !open ? "hidden transition-all ease-in-out duration-300" : ""
           }`}
         >
-          {/* {Array.isArray(category) ?  category[0] : ""} */}
-          <li className="text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5"></Link>
-          </li>
-
           <li className="text-lg text-white text-worksan font-normal  leading-8">
             <Link to="/" className="navlink py-1 lg:px-1.5">
               Design
-            
             </Link>
           </li>
           <li className=" text-lg text-white text-worksan font-normal  leading-8">
@@ -115,25 +112,37 @@ const Home = () => {
         </ul>
       </nav>
 
-      <div className="container grid  h-[100vh] w-full bg-black  ">
+      <div className="container grid h-[100vh] w-full bg-black  ">
         <div className="category  lg:w-[230px] md:w-[230px] w-0 md:h-full lg:h-full h-0 relative ">
+          {/* <div className="image md:w-full w-0 md:px-2  px-0 md:py-5  py-0 bg-black top-0 sticky flex justify-center">
+            <Link to="/">
+              {" "}
+              <img
+                src={logo}
+                alt="logo"
+                style={{ width: "120px", objectFit: "contain" }}
+              />{" "}
+            </Link>
+          </div> */}
           <div className=" md:flex flex-col  w-[230px] md:pl-[40px] lg:pl-[40px]  px-5 ">
-            <ul className="w-full">
+            <ul className="w-max">
               {category.map((item, index) => {
                 return (
-                  <li
-                    className="cat-list leading-10  font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
-                    key={index}
-                  >
-                    <NavLink
-                      to={/category/ + item.id}
-                      className={({ isActive }) =>
-                        isActive ? cattitleActive : cattitle
-                      }
+                  <p>
+                    <li
+                      className="cat-list leading-10  font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
+                      key={index}
                     >
-                      {item.name}
-                    </NavLink>
-                  </li>
+                      <NavLink
+                        to={/category/ + item.id}
+                        className={({ isActive }) =>
+                          isActive ? cattitleActive : cattitle
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  </p>
                 );
               })}
             </ul>
@@ -141,9 +150,8 @@ const Home = () => {
         </div>
 
         <div className="content  w-full h-full overflow-hidden">
-          {/* <nav className="navbar  lg:flex  justify-between items-center w-full  md:py-3 py-3 pb-4 md:px-[43px] px-4  md:top-0 top-0 sticky">
+          {/* <nav className="navbar  lg:flex  justify-between items-center w-full  md:py-3 py-3 pb-4 md:px-[43px] px-4  top-0 sticky">
             <div className="flex justify-between ">
-              
               <span
                 className="text-3xl cursor-pointer lg:hidden block text-white mr-[-2px]"
                 onClick={() => setOpen(!open)}
@@ -213,21 +221,21 @@ const Home = () => {
               <ul className={`w-max ${openCat ? "duration-200 " : "hidden"} `}>
                 {category.map((item, index) => {
                   return (
-                    <p>
+                    
                       <li
                         className="cat-list leading-10  font-worksan  text-white capitalize"
                         key={index}
                       >
-                        <Link
-                          to={/category/ + item.id}
-                          className={({ isActive }) =>
-                            isActive ? cattitleActive : cattitle
-                          }
-                        >
-                          {item.name}
-                        </Link>
+                        <NavLink
+                        to={/category/ + item.id}
+                        className={({ isActive }) =>
+                          isActive ? cattitleActive : cattitle
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
                       </li>
-                    </p>
+                    
                   );
                 })}
               </ul>
@@ -279,4 +287,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Category;

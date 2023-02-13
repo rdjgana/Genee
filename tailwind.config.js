@@ -19,11 +19,12 @@ module.exports = {
         xmd: "17px",
       },
       borderColor: {
-        light: "#31344c",
+        light: "#FC3CAC",
       },
       colors: {
         dark: {
           100: "#000103",
+          200:"#FC3CAC"
         },
 
         smoke: {
