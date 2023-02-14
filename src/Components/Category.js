@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../Asserts/logo.svg";
+import logo from "../Asserts/logo.png";
 import NotFound from "../Asserts/not-Found.svg";
 import { NavLink, Link } from "react-router-dom";
 import "../Styles/Home.css";
@@ -15,7 +15,7 @@ const Category = () => {
   const [open, setOpen] = useState(false);
   const [openCat, setCatOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [size, setSize] = useState();
+  const [size, setSize] = useState(0);
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
 
@@ -50,13 +50,15 @@ const Category = () => {
   );
 
   const cattitleActive = "text-dark-200 font-bold py-1 w-full";
-  const cattitle = "text-white font-bold py-1 ";
+  const cattitle = "text-white font-bold py-1";
+  const navLink ="py-1 lg:px-1.5 "
+  const navLinkActive ="py-1 lg:px-1.5 text-dark-200 font-bold"
 
   return (
     <>
       <nav className="navbar lg:flex justify-between items-center lg:px-[45px] lg:py-5 py-5 px-4 w-full top-0 sticky">
         <div className="flex justify-between ">
-          <div className="image px-0 py-0 bg-black  top-0 sticky flex justify-center">
+          <div className="image px-0 py-0  top-0 sticky flex justify-center">
             <Link to="/">
               {" "}
               <img
@@ -73,67 +75,82 @@ const Category = () => {
             <ion-icon name={open ? "close" : "menu"}></ion-icon>
           </span>
         </div>
-        <div className="flex bg-smoke-100  rounded-md lg:py-1 py-0 lg:pl-4 pl-5 lg:w-[300px] w-full  mt-2 ">
+        {/* <div className="flex bg-smoke-100  rounded-md lg:py-1 py-0 lg:pl-4 pl-5 lg:w-[300px]  w-full  mt-2 "> */}
           <form action="">
-            <div className="relative flex items-center w-full text-white bg-smoke-100 ">
+            <div className="relative flex items-center w-full text-white bg-smoke-100 lg:w-[350px] px-3 rounded-md lg:mt-0 mt-3">
               <BiSearch className="w-[20px]  h-[20px] mt-1 ml-[1px] font-normal bg-smoke-100 " />
               <input
                 type="text"
                 placeholder="Ask Me Anything"
-                className=" px-2 py-2 font-xmd  w-full h-full placeholder-white text-white font-normal bg-smoke-100 rounded-2xl bordder-none focus:outline-none"
+                className="px-2 py-2 font-xmd  w-full h-full placeholder-white text-white font-normal bg-smoke-100 rounded-2xl outline-none bordder-none focus:outline-none"
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                 }}
               />
             </div>
           </form>
-        </div>
+        {/* </div> */}
         <ul
-          className={`lg:flex  lg:items-center lg:h-max  gap-2 lg:z-auto w-full lg:w-auto lg:py-0 lg:mt-0 mt-4 ${
+          className={`lg:flex  lg:items-center bg-transparent lg:h-max gap-2 lg:z-auto w-full lg:w-auto lg:py-0 lg:mt-0 mt-4 ${
             !open ? "hidden transition-all ease-in-out duration-300" : ""
           }`}
         >
-          <li className="text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              Design
-            </Link>
+          <li className="text-lg text-white text-worksan font-normal  leading-8" onClick={() => setOpen(!open)}>
+          <NavLink
+              to="/category/1"
+              style={{ textTransform: "capitalize" }}
+              // className="navlink py-1 lg:px-1.5"
+              className={({ isActive }) =>
+              isActive ? navLinkActive: navLink
+            }
+            >
+              {category[0]?.name}
+            </NavLink>
           </li>
-          <li className=" text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              Development
-            </Link>
+          <li className=" text-lg text-white text-worksan font-normal  leading-8" onClick={() => setOpen(!open)}>
+          <NavLink
+              to="/category/2"
+              style={{ textTransform: "capitalize" }}
+              // className="navlink py-1 lg:px-1.5 "
+              className={({ isActive }) =>
+              isActive ? navLinkActive: navLink
+            }
+            >
+              {category[1]?.name}
+            </NavLink>
           </li>
-          <li className=" text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              3D
-            </Link>
+          <li className=" text-lg text-white text-worksan font-normal  leading-8" onClick={() => setOpen(!open)}>
+          <NavLink
+              to="/category/3"
+              style={{ textTransform: "capitalize" }}
+              className="navlink py-1 lg:px-1.5"
+              className={({ isActive }) =>
+              isActive ? navLinkActive: navLink
+            }
+            >
+              {category[2]?.name}
+            </NavLink>
           </li>
           <hr />
         </ul>
       </nav>
 
       <div className="container grid h-[100vh] w-full bg-black  ">
-        <div className="category  lg:w-[230px] md:w-[230px] w-0 md:h-full lg:h-full h-0 relative ">
-          {/* <div className="image md:w-full w-0 md:px-2  px-0 md:py-5  py-0 bg-black top-0 sticky flex justify-center">
-            <Link to="/">
-              {" "}
-              <img
-                src={logo}
-                alt="logo"
-                style={{ width: "120px", objectFit: "contain" }}
-              />{" "}
-            </Link>
-          </div> */}
+        <div className="category  lg:w-[230px] md:w-[230px] w-0 md:h-full lg:h-full h-0 left-0 sticky">
+        
           <div className=" md:flex flex-col  w-[230px] md:pl-[40px] lg:pl-[40px]  px-5 ">
-            <ul className="w-max">
+            <ul className="w-full">
               {category.map((item, index) => {
                 return (
-                  <p>
+                  
                     <li
-                      className="cat-list leading-10  font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
+                      style={{paddingBottom:'-5px'}}
+                      className="cat-list leading-10 font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
                       key={index}
                     >
+                      
                       <NavLink
+                        
                         to={/category/ + item.id}
                         className={({ isActive }) =>
                           isActive ? cattitleActive : cattitle
@@ -142,7 +159,7 @@ const Category = () => {
                         {item.name}
                       </NavLink>
                     </li>
-                  </p>
+                  
                 );
               })}
             </ul>
@@ -200,10 +217,10 @@ const Category = () => {
             </ul>
           </nav> */}
 
-          {size <= 480 ? (
+          {size <= 480  ? (
             <div className="mobile-category mt-1 left-0 px-4">
               <div className="flex justify-between items-center">
-                <span className="font-normal text-2xl text-white  mb-3">
+                <span className="font-normal text-2xl text-white mb-3 lg:hidden">
                   Category
                 </span>
 
@@ -221,21 +238,20 @@ const Category = () => {
               <ul className={`w-max ${openCat ? "duration-200 " : "hidden"} `}>
                 {category.map((item, index) => {
                   return (
-                    
-                      <li
-                        className="cat-list leading-10  font-worksan  text-white capitalize"
-                        key={index}
-                      >
-                        <NavLink
+                    <li
+                      className="cat-list leading-10  font-worksan  text-white capitalize"
+                      key={index}
+                      onClick={() => setCatOpen(!openCat)}
+                    >
+                      <NavLink
                         to={/category/ + item.id}
                         className={({ isActive }) =>
                           isActive ? cattitleActive : cattitle
-                        }
+                  }
                       >
                         {item.name}
                       </NavLink>
-                      </li>
-                    
+                    </li>
                   );
                 })}
               </ul>

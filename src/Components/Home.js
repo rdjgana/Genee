@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import logo from "../Asserts/logo.svg";
+import logo from "../Asserts/logo.png";
 import NotFound from "../Asserts/not-Found.svg";
 import { NavLink, Link } from "react-router-dom";
 import "../Styles/Home.css";
-// import { CategoryData } from "./CategoryData";
-// import { CardData } from "./CardData";
 import { BiSearch } from "react-icons/bi";
-import Footer from "./Footer";
 import axios from "axios";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [openCat, setCatOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [size, setSize] = useState();
+  const [size, setSize] = useState(0);
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
 
@@ -44,7 +41,6 @@ const Home = () => {
   const filtered = product.filter((val) =>
     val.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
 
   const cattitleActive = "text-dark-200 font-bold py-1 w-full ";
   const cattitle = "text-white font-bold py-1  hover:text-dark-200 ";
@@ -53,7 +49,7 @@ const Home = () => {
     <>
       <nav className="navbar lg:flex justify-between items-center lg:px-[45px] lg:py-5 py-5 px-4 w-full top-0 sticky">
         <div className="flex justify-between ">
-          <div className="image px-0 py-0 bg-black  top-0 sticky flex justify-center">
+          <div className="image px-0 py-0 top-0 sticky flex justify-center">
             <Link to="/">
               {" "}
               <img
@@ -96,19 +92,22 @@ const Home = () => {
           </li>
 
           <li className="text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              Design
-            
+            <Link
+              to="/category/1"
+              style={{ textTransform: "capitalize" }}
+              className="navlink py-1 lg:px-1.5"
+            >
+              {category[0]?.name}
             </Link>
           </li>
           <li className=" text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              Development
+            <Link to="/category/2"  style={{ textTransform: "capitalize" }} className="navlink py-1 lg:px-1.5">
+              {category[1]?.name}
             </Link>
           </li>
           <li className=" text-lg text-white text-worksan font-normal  leading-8">
-            <Link to="/" className="navlink py-1 lg:px-1.5">
-              3D
+            <Link to="/category/3" className="navlink py-1 lg:px-1.5">
+              {category[2]?.name}
             </Link>
           </li>
           <hr />
@@ -117,12 +116,12 @@ const Home = () => {
 
       <div className="container grid  h-[100vh] w-full bg-black  ">
         <div className="category  lg:w-[230px] md:w-[230px] w-0 md:h-full lg:h-full h-0 relative ">
-          <div className=" md:flex flex-col  w-[230px] md:pl-[40px] lg:pl-[40px]  px-5 ">
+          <div className=" md:flex flex-col w-[230px] md:pl-[40px] lg:pl-[40px] px-5">
             <ul className="w-full">
               {category.map((item, index) => {
                 return (
                   <li
-                    className="cat-list leading-10  font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
+                    className="cat-list leading-10 font-worksan w-full text-white capitalize hover:text-dark-200 hover:border-b-2 border-light"
                     key={index}
                   >
                     <NavLink
@@ -192,10 +191,10 @@ const Home = () => {
             </ul>
           </nav> */}
 
-          {size <= 480 ? (
+          {size <= 480? (
             <div className="mobile-category mt-1 left-0 px-4">
               <div className="flex justify-between items-center">
-                <span className="font-normal text-2xl text-white  mb-3">
+                <span className="font-normal text-2xl text-white mb-3 lg:hidden">
                   Category
                 </span>
 

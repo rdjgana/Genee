@@ -2,7 +2,11 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: black;
+    /* background-color: black; */
+}
+
+body{
+    background: black;
 }
 
 .container {
@@ -70,7 +74,7 @@
 
 .navbar{
     
-    background:rgba(0,0,0,0.9);
+    background:rgba(0,0,0,0.8);
     backdrop-filter: blur(20px);
     z-index: 1;
 }
